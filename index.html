@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Boolzap</title>
@@ -18,11 +17,31 @@
 
           <!-- Section - side bar -->
           <section class="side_bar float">
+
+            <!-- user profile -->
             <div class="user_profile">
-              <div class="avatar">
-                <img src="img/avatar_io.jpg" alt="avatar_io">
+              <div class="container_flex">
+                <div class="avatar">
+                  <img src="img/avatar_io.jpg" alt="avatar_io">
+                </div>
+
+                <!-- user menu -->
+                <ul class="user_menu clear">
+                  <li class="float">
+                    <a href="#"><i class="fas fa-circle-notch"></i></a>
+                  </li>
+                  <li class="float">
+                    <a href="#"><i class="fas fa-comment-alt"></i></i></a>
+                  </li>
+                  <li class="float">
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                  </li>
+                </ul>
+                <!-- end user menu -->
+
               </div>
             </div>
+            <!-- end user profile -->
 
             <!-- notify -->
             <div class="notify">
@@ -57,17 +76,27 @@
                 </li>
                 <li>
                   <div class="avatar">
-                    <img src="img/avatar_1.jpg" alt="avatar_1">
+                    <img src="img/avatar_4.jpg" alt="avatar_1">
                   </div>
                 </li>
                 <li>
                   <div class="avatar">
-                    <img src="img/avatar_2.jpg" alt="avatar_2">
+                    <img src="img/avatar_5.jpg" alt="avatar_2">
                   </div>
                 </li>
                 <li>
                   <div class="avatar">
-                    <img src="img/avatar_3.jpg" alt="avatar_3">
+                    <img src="img/avatar_6.jpg" alt="avatar_3">
+                  </div>
+                </li>
+                <li>
+                  <div class="avatar">
+                    <img src="img/avatar_7.jpg" alt="avatar_3">
+                  </div>
+                </li>
+                <li>
+                  <div class="avatar">
+                    <img src="img/avatar_8.jpg" alt="avatar_3">
                   </div>
                 </li>
               </ul>
@@ -78,12 +107,24 @@
 
           <!-- Section - user interface -->
           <section class="user_interface float">
-            <div class="current_contact">
-              <div class="avatar">
-                <img src="img/avatar_1.jpg" alt="avatar_1">
+            <div class="container_flex">
+
+              <div class="current_contact">
+                <div class="avatar">
+                  <img src="img/avatar_1.jpg" alt="avatar_1">
+                </div>
               </div>
-            </div>
-            <div class="texting_area">
+
+              <div class="texting_area">
+              </div>
+
+              <div class="texting_bar">
+                <div class="container_flex">
+                  <i class="far fa-smile"></i>
+                  <input type="text" placeholder="Scrivi un messaggio">
+                  <i class="fas fa-microphone"></i>
+                </div>
+              </div>
 
             </div>
           </section>
