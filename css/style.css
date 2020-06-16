@@ -32,7 +32,6 @@ body {
   width: 1100px;
   min-width: 900px;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 /* Utility */
@@ -99,16 +98,10 @@ main {
 }
 
 /* Contacts */
-.contacts {
-  height: 100%;
-  width: 100%;
-  background-color: #fff;
-}
-
 .contact_list {
-  height: 100%;
+  height: calc(100% - 70px - 70px - 57px);
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .contact_list > li {
@@ -121,5 +114,14 @@ main {
 .user_interface {
   width: calc(100% - 350px);
   height: 100%;
-  background-color: coral;
+}
+
+.current_contact {
+  padding: 10px;
+  background-color: #eaeaea;
+  border-left: 1px solid #f5f5f5;
+}
+
+.texting_area {
+  background-image: url("../");
 }
