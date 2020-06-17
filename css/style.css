@@ -49,8 +49,22 @@ body {
   display: flex;
 }
 
+.none {
+  display: none;
+}
+
 .contact_list .selected {
   background-color: #e9ebeb;
+}
+
+.square_speech.sent {
+  background-color: #d5f9ba;
+  float: right;
+}
+
+.square_speech.received {
+  background-color: #fff;
+  float: left;
 }
 
 /** Main **/
@@ -193,13 +207,36 @@ main {
   border-left: 1px solid #f5f5f5;
 }
 
-/* Texting area */
+/** Texting area **/
 .texting_area {
   height: calc(100% - 140px);
   background-image: url("../img/mine.jpg");
   overflow-y: scroll;
-  flex-grow: 1;
 }
+
+.texting_area .messages_box {
+  padding: 40px 70px;;
+}
+
+.texting_area .square_speech {
+  display: inline-block;
+  padding: 15px 15px 20px 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  width: 40%;
+  clear: both;
+  position: relative;
+}
+
+.message_time {
+  position: absolute;
+  right: 8px;
+  bottom: 5px;
+  font-size: 12px;
+  color: #bfc2c4;
+  font-weight: 300;
+}
+
 
 /* Texting bar */
 .texting_bar {
@@ -210,13 +247,13 @@ main {
   border: 0;
   height: 50px;
   padding:0 10px;
-  margin: 0 20px;
+  margin: 0 10px;
   flex-grow: 1;
   border-radius: 5px;
 }
 
-.texting_bar i {
-  font-size: 25px;
+.texting_bar .icon {
   margin: 0 10px;
+  font-size: 25px;
   color: #6b7276;
 }
