@@ -218,7 +218,29 @@ main {
   padding: 40px 70px;;
 }
 
-.texting_area .square_speech {
+/* Texting bar */
+.texting_bar {
+  background-color: #f3eeea;
+}
+
+.texting_bar input {
+  border: 0;
+  height: 50px;
+  padding:0 10px;
+  margin: 0 10px;
+  flex-grow: 1;
+  border-radius: 5px;
+}
+
+.texting_bar .icon {
+  font-size: 25px;
+  color: #6b7276;
+  width: 40px;
+  text-align: center;
+}
+
+/** Template **/
+.square_speech {
   display: inline-block;
   padding: 15px 15px 20px 15px;
   margin-bottom: 15px;
@@ -237,23 +259,17 @@ main {
   font-weight: 300;
 }
 
-
-/* Texting bar */
-.texting_bar {
-  background-color: #f3eeea;
+.message_menu_icon {
+  position: absolute;
+  right: 8px;
+  top: 5px;
+  color: #bfc2c4;
+  font-size: 14px;
 }
 
-.texting_bar input {
-  border: 0;
-  height: 50px;
-  padding:0 10px;
-  margin: 0 10px;
-  flex-grow: 1;
-  border-radius: 5px;
-}
-
-.texting_bar .icon {
-  margin: 0 10px;
-  font-size: 25px;
-  color: #6b7276;
+.square_speech_dropdown {
+  position: absolute;
+  right: 8px;
+  top: 20px;
+  background-color: white;
 }
