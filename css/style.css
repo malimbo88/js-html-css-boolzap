@@ -272,4 +272,27 @@ main {
   right: 8px;
   top: 20px;
   background-color: white;
+  padding: 10px;
+}
+
+.square_speech_dropdown li {
+  padding: 5px;
+}
+
+.square_speech_dropdown li:hover span,
+.square_speech_dropdown li:hover i {
+  color: #000;
+  cursor: pointer;
+}
+
+.square_speech_dropdown i {
+  color: #747474;
+  width: 15px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.square_speech_dropdown span {
+  font-size: 12px;
+  color: #b1b1b1
 }

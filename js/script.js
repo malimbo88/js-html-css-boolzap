@@ -72,6 +72,12 @@ $(document).ready(function() {
     $(this).siblings(".square_speech_dropdown").toggleClass("none");
   });
 
+  //se faccio click su cancella nel mnu dropdown del messaggio
+  //cancello il messaggio corrente
+  $(document).on("click", ".message_cancel", function() {
+    $(this).parent().parent().parent().remove();
+  });
+
 //FUNZIONI
 //Invia un messaggio e aggiungilo al div con classe messages_box
 function sendMessage () {
