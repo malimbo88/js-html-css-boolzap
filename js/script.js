@@ -33,14 +33,12 @@ $(document).ready(function() {
   //cercare contatti con input search
   $(document).on("keyup", "#search_bar", function() {
     var userType = $(this).val().toLowerCase()
-    console.log("Valore immesso Utente " + userType)
     //cerca un nome nei contatti attraverso il valore input iserito in search_bar
     //cerca tra tutti gli user_name della lista contact_list
     //se il user_name contiene i valori di testo inseriti in input da utente mostra i risultati
     //altrimenti nascondi i risultati che non corrispondono ai valori di ricerca immessi
     $("li.contact_item").each(function() {
       var userName = $(this).find(".user_name").text().toLowerCase()
-      console.log("Nome Utente " + userName)
       if (userName.includes(userType)) {
         $(this).show()
       }else {
@@ -72,15 +70,48 @@ $(document).ready(function() {
     $(this).siblings(".square_speech_dropdown").toggleClass("none");
   });
 
-  //se faccio click su cancella nel mnu dropdown del messaggio
+  //se faccio click su cancella nel menu dropdown del messaggio
   //cancello il messaggio corrente
   $(document).on("click", ".message_cancel", function() {
     $(this).parent().parent().parent().remove();
   });
 
+  //Al click su un contatto tra quelli in lista contatti
+  //Scrive user_name e src avatar img del contatto in user_interface
+  //Associa ad ogni contatto una message_box separata per scrivere i messaggi
+  $(document).on("click", "li.contact_item", function() {
+    //variabile che indica la barra del cotatto cliccata
+    var userContactBar = $(this)
+    //variabile che contiene il nome utente testuale elemento cliccato
+    var userName = $(this).find(".contact_info > .user_name").text();
+    //variabile che contiene attributo src di immagine avatar elemento cliccato
+    var userAvatar = $(this).find(".avatar > img").attr("src");
+    //cambio il colore della barra del contatto
+    //rimuovo la classe selected a tutti gli elementi fratelli rispetto a quello cliccato
+    //aggiungo classe selected per cambiare il background color di elemento cliccato
+    userContactBar.siblings().removeClass("selected");
+    userContactBar.addClass("selected");
+    // assegno nome utente cliccato a user_inteface user_name
+    $(".user_interface .user_name").text(userName);
+    // assegno attr src immagine avatar a user_interface avatar img
+    $(".user_interface .avatar img").attr("src", userAvatar);
+    //al click su un contatto faccio vedere la message_box che ha attributo data identico
+    //controllo tra tutte le finestre chat a disposizione (.messages_box)
+    $(".texting_area > .messages_box").each(function () {
+      var dataContact = userContactBar.attr("data-contact");
+      var dataMessage = $(this).attr("data-message")
+      //per visualizzare la messages_box aggiungo la classe active a quella che voglio mostrare
+      //tolgo la classe active a tutte le altre
+      if (dataContact === dataMessage) {
+        $(this).siblings().removeClass("active")
+        $(this).addClass("active");
+      }
+    });
+  });
+
 //FUNZIONI
 //Invia un messaggio e aggiungilo al div con classe messages_box
-function sendMessage () {
+function sendMessage() {
   // vado a definire in una variabile quello che utente scrive in input text_area
   var messageText = $("#send_message_bar").val();
 
@@ -98,7 +129,7 @@ function sendMessage () {
     //aggiungo al contenitore del testo la classe sent per dargli li stili dei messaggi inviati
     newMessageSquare.addClass("sent");
     //appendo il div nel message_box ovvero dove utente potrà leggere i messaggi inviati e ricevuti
-    $(".messages_box").append(newMessageSquare);
+    $(".messages_box.active").append(newMessageSquare);
     //Invia messaggio di risposta
     setTimeout(sendMessageReply, 1000);
     //scrollo la message_box fino alla fine per mostrare a utente i messaggi piu recenti
@@ -108,7 +139,7 @@ function sendMessage () {
 }
 
 //Invia messaggio di risposta
-function sendMessageReply () {
+function sendMessageReply() {
 
   // indico una variabile che definisce il contenitore del testo scritto da utente
   //ovvero .square_speech che è appunto il div contenitore del tag span contenete il message_text
@@ -120,13 +151,13 @@ function sendMessageReply () {
   //aggiungo al contenitore del testo la classe sent per dargli li stili dei messaggi inviati
   newMessageSquare.addClass("received");
   //appendo il div nel message_box ovvero dove utente potrà leggere i messaggi inviati e ricevuti
-  $(".messages_box").append(newMessageSquare);
+  $(".messages_box.active").append(newMessageSquare);
 
 }
 
 //Determina orario corrente
 //scrivi orario corrente aggiungendo gli 0 davanti alle cifre inferiori a 10
-function time () {
+function time() {
   var date = new Date()
   var hours = date.getHours()
   var minutes = date.getMinutes()
@@ -141,6 +172,5 @@ function time () {
   }
   return currentTime
 }
-
 
 });
