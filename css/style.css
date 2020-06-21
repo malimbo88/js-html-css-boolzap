@@ -213,6 +213,7 @@ main {
   height: calc(100% - 140px);
   background-image: url("../img/mine.jpg");
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .texting_area .messages_box {
@@ -247,13 +248,16 @@ main {
 
 /** Template **/
 .square_speech {
-  display: inline-block;
   padding: 15px 15px 20px 15px;
   margin-bottom: 15px;
   border-radius: 10px;
   width: 40%;
   clear: both;
   position: relative;
+}
+
+.message_text {
+  word-wrap: break-word
 }
 
 .message_time {
