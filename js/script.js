@@ -12,13 +12,13 @@ $(document).ready(function() {
   //Quando faccio tolgo il focus(blur) sulla input#send_message_bar appare icona mic_icon
   //aggiungo la classe none dal div che deve scomparire
   //tolgo classe non da div che devo mostrare
-  $(document).on("blur", ".texting_bar", function () {
+  $(document).on("blur", "input#send_message_bar", function () {
     $(".rigth_switch.icon").children(".mic_icon").removeClass("none");
     $(".rigth_switch.icon").children(".sent_icon").addClass("none");
   });
 
   //invio il messaggio a click su icona predisposta
-  $(document).on("click", ".sent_icon" , function() {
+  $(document).on("click", ".rigth_switch.icon" , function() {
     sendMessage();
   });
 
@@ -81,32 +81,35 @@ $(document).ready(function() {
   //Associa ad ogni contatto una message_box separata per scrivere i messaggi
   $(document).on("click", "li.contact_item", function() {
     //variabile che indica la barra del cotatto cliccata
-    var userContactBar = $(this)
-    //variabile che contiene il nome utente testuale elemento cliccato
-    var userName = $(this).find(".contact_info > .user_name").text();
+    var currentContact = $(this)
+    //variabile che contiene il nome utente relativo al contatto cliccato
+    var userName = currentContact.find(".contact_info > .user_name").text();
+    //variabile che contiene le info generiche relative al contatto cliccato
+    var userInfo = currentContact.find(".contact_info > .user_info").text();
     //variabile che contiene attributo src di immagine avatar elemento cliccato
-    var userAvatar = $(this).find(".avatar > img").attr("src");
+    var userAvatar = currentContact.find(".avatar > img").attr("src");
+    //variabile che contiene il valore attr di data-contact
+    var dataContact = currentContact.attr("data-contact");
+    console.log(dataContact)
     //cambio il colore della barra del contatto
     //rimuovo la classe selected a tutti gli elementi fratelli rispetto a quello cliccato
     //aggiungo classe selected per cambiare il background color di elemento cliccato
-    userContactBar.siblings().removeClass("selected");
-    userContactBar.addClass("selected");
+    currentContact.siblings().removeClass("selected");
+    currentContact.addClass("selected");
     // assegno nome utente cliccato a user_inteface user_name
     $(".user_interface .user_name").text(userName);
+    //assegno le info relative al contatto a user_interface user_info
+    $(".user_interface .user_info").text(userInfo);
     // assegno attr src immagine avatar a user_interface avatar img
     $(".user_interface .avatar img").attr("src", userAvatar);
-    //al click su un contatto faccio vedere la message_box che ha attributo data identico
-    //controllo tra tutte le finestre chat a disposizione (.messages_box)
-    $(".texting_area > .messages_box").each(function () {
-      var dataContact = userContactBar.attr("data-contact");
-      var dataMessage = $(this).attr("data-message")
-      //per visualizzare la messages_box aggiungo la classe active a quella che voglio mostrare
-      //tolgo la classe active a tutte le altre
-      if (dataContact === dataMessage) {
-        $(this).siblings().removeClass("active")
-        $(this).addClass("active");
-      }
-    });
+    //Tolgo la classe active ai messages_box non selezionati quindi non appartenti al contatto correntemente
+    //ovvero con un valore dell'attr data-message diverso da attr data-contact relativo al contatto corrente
+    $(".messages_box[data-message=\"" + dataContact + "\"]").siblings().removeClass("active");
+    //Aggiungo la classe active al messages_box selezionato quindi appartente al contatto correntemente
+    //ovvero con un valore dell'attr data-message uguale a attr data-contact relativo al contatto corrente
+    $(".messages_box[data-message=\"" + dataContact + "\"]").addClass("active")
+
+
   });
 
 //FUNZIONI
@@ -123,6 +126,8 @@ function sendMessage() {
     newMessageSquare.children(".message_text").text(messageText);
     //scrivo l'orario corrente sotto al messaggio
     newMessageSquare.children(".message_time").text(time());
+    //
+    $(".user_interface .current_contact .user_date").text("Last mess. sent: " + time() + " - " + month() + " - " + year())
     //resetto il valore di input in modo che utente possa scrivere un nuovo messaggio
     $(".texting_bar input").val("");
     //aggiungo al contenitore del testo la classe sent per dargli gli stili dei messaggi inviati
@@ -176,3 +181,45 @@ function time() {
 
 //Fine document.ready Jquery
 });
+
+function month() {
+  var date = new Date()
+  var month = date.getMonth()
+
+  if (month === 1) {
+    month = "January";
+  }else if (month === 2) {
+    month = "February";
+  }else if (month === 3) {
+    month = "March";
+  }else if (month === 4) {
+    month = "April";
+  }else if (month === 5) {
+    month = "May";
+  }else if (month === 6) {
+    month = "June";
+  }else if (month === 7) {
+    month = "July";
+  }else if (month === 8) {
+    month = "August";
+  }else if (month === 9) {
+    month = "September";
+  }else if (month === 10) {
+    month = "Optober";
+  }else if (month === 11) {
+    month = "November";
+  }else if (month === 12) {
+    month = "December";
+  }
+  return month;
+}
+
+console.log(month())
+
+function year() {
+  var date = new Date()
+  var year = date.getFullYear()
+  return year;
+}
+
+console.log(year())
