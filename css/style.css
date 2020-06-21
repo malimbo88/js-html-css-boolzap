@@ -113,6 +113,10 @@ main {
   color: #c5c7c9;
 }
 
+.contact_info .user_date {
+  display: none;
+}
+
 .icon_menu li {
   display: inline-block;
 }
@@ -149,9 +153,29 @@ main {
   color: #537b8c;
 }
 
-.notify .user_info {
+.notify_text {
   color: #537b8c;
   font-size: 14px;
+  display: inline-block;
+  flex-grow: 1;
+}
+
+.notify_text .notify_top_text {
+  display: block;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.notify_text .notify_bottom_text {
+  display: block;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.notify a:hover {
+  color: #0099ff
 }
 
 /* Search */

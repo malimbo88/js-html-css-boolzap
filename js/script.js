@@ -1,6 +1,21 @@
 //myJavaScript
 $(document).ready(function() {
 
+  //Reset di user_Inteface Current Contacts
+  //Quello che vediamo appena apriamo la pagina
+  //user name visibile in apertura in user_interface
+  var userNameReset = $(".contact_item.selected .user_name").text()
+  $(".user_interface .user_name").text(userNameReset);
+  //user info visibile in apertura in user_interface
+  var userInfoReset = $(".contact_item.selected .user_info").text();
+  $(".user_interface .user_info").text(userInfoReset);
+  //user date visibile in apertura in user_interface
+  var userDateReset = $(".contact_item.selected .user_date").text();
+  $(".user_interface .user_date").text(userDateReset);
+  //user img avatar visibile in apertura in user_interface
+  var userAvatarReset = $(".contact_item.selected .avatar > img").attr("src");
+  $(".user_interface .avatar img").attr("src", userAvatarReset);
+
   //Quando faccio focus sulla input send message bar appare icona sent_message
   //aggiungo la classe none dal div che deve scomparire
   //tolgo classe non da div che devo mostrare
@@ -76,6 +91,7 @@ $(document).ready(function() {
     $(this).parent().parent().parent().remove();
   });
 
+
   //Al click su un contatto tra quelli in lista contatti
   //Scrive user_name e src avatar img del contatto in user_interface
   //Associa ad ogni contatto una message_box separata per scrivere i messaggi
@@ -86,11 +102,13 @@ $(document).ready(function() {
     var userName = currentContact.find(".contact_info > .user_name").text();
     //variabile che contiene le info generiche relative al contatto cliccato
     var userInfo = currentContact.find(".contact_info > .user_info").text();
+    //variabile che contiene informazioni ultimo mess inviato da contatto corrente
+    var userDate = currentContact.find(".contact_info > .user_date").text();
+    console.log(userDate)
     //variabile che contiene attributo src di immagine avatar elemento cliccato
     var userAvatar = currentContact.find(".avatar > img").attr("src");
     //variabile che contiene il valore attr di data-contact
     var dataContact = currentContact.attr("data-contact");
-    console.log(dataContact)
     //cambio il colore della barra del contatto
     //rimuovo la classe selected a tutti gli elementi fratelli rispetto a quello cliccato
     //aggiungo classe selected per cambiare il background color di elemento cliccato
@@ -100,6 +118,8 @@ $(document).ready(function() {
     $(".user_interface .user_name").text(userName);
     //assegno le info relative al contatto a user_interface user_info
     $(".user_interface .user_info").text(userInfo);
+    //scrive in user_interface la data di immissione di ultimo messaggio inviato
+    $(".user_interface .user_date").text(userDate);
     // assegno attr src immagine avatar a user_interface avatar img
     $(".user_interface .avatar img").attr("src", userAvatar);
     //Tolgo la classe active ai messages_box non selezionati quindi non appartenti al contatto correntemente
@@ -126,8 +146,10 @@ function sendMessage() {
     newMessageSquare.children(".message_text").text(messageText);
     //scrivo l'orario corrente sotto al messaggio
     newMessageSquare.children(".message_time").text(time());
-    //
-    $(".user_interface .current_contact .user_date").text("Last mess. sent: " + time() + " - " + month() + " - " + year())
+    //scrivo data ora mese anno ogni volta che invio un mess nel contatto con classe selected
+    $(".contact_item.selected .user_date").text("Last mess sent: " + time() + " - " + month() + " - " + year())
+    //scrivo data ora mese anno ogni volta che invio un mess nella user face currebt_contact con classe selected
+    $(".user_interface .user_date").text("Last mess sent: " + time() + " - " + month() + " - " + year())
     //resetto il valore di input in modo che utente possa scrivere un nuovo messaggio
     $(".texting_bar input").val("");
     //aggiungo al contenitore del testo la classe sent per dargli gli stili dei messaggi inviati
@@ -141,6 +163,7 @@ function sendMessage() {
     //scrollo la message_box fino alla fine ovvero altezza totale del div contenitore texting_area per mostrare a utente i messaggi piu recenti
     var messageBoxHigh = $(".texting_area").prop("scrollHeigth");
     $(".texting_area").scrollTop(messageBoxHigh)
+
   }
 };
 
@@ -214,12 +237,8 @@ function month() {
   return month;
 }
 
-console.log(month())
-
 function year() {
   var date = new Date()
   var year = date.getFullYear()
   return year;
 }
-
-console.log(year())
